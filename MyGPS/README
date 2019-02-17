@@ -1,0 +1,84 @@
+Nume, prenume: Iuga, Florin-Eugen
+Grupa, seria: 312CA
+
+Data inceperii temei: 26-04-2018
+Data finalizarii temei: 01-05-2018
+
+Probleme intampinate:
+  - timpul scurt pentru valgrind
+  - optimizarea cat mai mult a programului
+
+Algoritmul utilizat:
+  - In esenta, rezolvarea temei are la baza implementarea
+    structurilor de date Graph, respectiv Hashtable. In acest
+    sens, am implementat clasa ListGraph.h care foloseste liste
+    de adiacenta. Pe langa functiile generale ale unei clase 
+    de tip Graf (addEdge(), getNeighbors() etc.) am mai 
+    implementat functia care intoarce graful transpus asociat
+    grafului normal. Clasa HashTable.h o folosesc pentru
+    maparea unui string cu un index si invers. Astfel, clasa
+    contine un pointer la o functie hash din hash_functions.h.
+    Am ales un HMAX cat mai mare pentru a evita un numar mare
+    de coliziuni. HashTable.h contine functiile specifice,
+    respectiv functia put() care introduce in Hashtable cheia
+    si valoarea asociata acesteia sau functia get() care
+    intoarce valoarea asociata unei anumite chei.
+    
+    In continuare voi descrie algoritmul de rezolvare al temei,
+    implementat in fisierul tema2.cpp, in functie de fiecare
+    task.Trebuie sa mentionez ca functia main() este putin mai
+    mare deoarece in ea fac citirea, respectiv scrierea in
+    fisier pentru fiecare task, folosind functiile implemen-
+    tate anterior. Am considerat ca urmez un fir mai logic
+    facand asta decat sa am functii de genul void doTask1()
+    etc.
+
+    TASK1: M-am folosit de structura City care contine un camp
+           numit int crowded; care reprezinta nivelul de aglo-
+           meratie al fiecarui oras. Astfel, la adaugarea
+           muchiilor prin folosirea functiei addEdge(k, l)
+           incrementez city[l].crowded, iar dupa scot maximul
+           din acest vector si rezulta cel mai aglomerat oras.
+    
+    TASK2: Task-ul 2 reiese foarte usor din implementarea
+           task-ului 3, verificand numarul de orase la care
+           nu poate ajunge un anumit oras. Evident, daca acest
+           numar este 0 atunci harta este valida si invalida
+           in caz contrar.
+
+    TASK3: Fac doua DFS-uri recursive pentru fiecare oras, unul
+           pe graful initial si unul pe graful transpus. In
+           functia createVisitedVectors() "construiesc" cei
+           doi vectori de tip bool pe care ii folosesc in
+           functia getUnReachableCitiesInd() care intoarce
+           vectorul de orase inaccesibile pentru un oras.
+   
+    TASK4: Utilizez functia getMinDist() in care aplic BFS pana
+           cand dau de cel mai apropiat oras care contine si
+           intorc distanta minima pana la el pentru a verifica
+           daca are destul combustibil, in functie consum si de
+           cantinatea initiala de benzina.
+
+    TASK5: Folosesc structura Routes. Functia wasAdded()
+           verifica daca a mai fost bagat un traseu src-dest
+           in structura. Daca da, intoarce index-ul pe care
+           a fost gasita repetita traseului.Astfel, daca a
+           mai fost adaugat in structura atunci incrementez
+           numarul de pasageri de pe index-ul intors cu
+           nrPassengers citit de la stdin, respectiv adaug
+           in structura pe pozitia contor sursa, destinatia si
+           numarul de pasageri.Ulterior, aflu index-ul rutei
+           cu cei mai multi pasageri cu ajutorul functiei
+           getFamousRoute() si retin sursa,destinatia, respec-
+           tiv numarul de pasageri asociat acelui index. In
+           final intorc traseul (cel mai scurt) prin functia
+           getMinPath().
+    
+    
+    Complexitatea temei: Consider ca tema nu a fost foarte grea,
+                         dar dificultatea a provenit din timpul
+                         foarte scurt pentru valgrind.
+ 
+    Alte precizari: A fost tema care mi-a dat cele mai multe
+                    batai de cap legat de eficienta.
+
